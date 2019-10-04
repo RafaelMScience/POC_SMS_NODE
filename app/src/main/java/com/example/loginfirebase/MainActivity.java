@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
-                        String login = ds.child("login").getValue().toString();
-                        String senha = ds.child("senha").getValue().toString();
+                        String login = (String) ds.child("login").getValue();
+                        String senha = (String) ds.child("senha").getValue();
                         mensageList.add(new Users(login,senha, null, null));
                     }
                     adapter = new MensagemAdapter(mensageList, R.layout.mensagem_view);
