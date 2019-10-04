@@ -1,7 +1,11 @@
 package com.example.loginfirebase.adapters;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginfirebase.CadastroActivity;
@@ -18,6 +23,10 @@ import com.example.loginfirebase.Users;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+
+import static android.Manifest.permission.READ_PHONE_NUMBERS;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.READ_SMS;
 
 public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHolder> {
 
@@ -73,4 +82,5 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
             });
         }
     }
+
 }

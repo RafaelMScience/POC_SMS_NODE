@@ -20,7 +20,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private EditText login, senha;
 
-    private Users user;
+    private Users user = new Users();
 
     FirebaseDatabase database;
     DatabaseReference ref;
@@ -34,7 +34,7 @@ public class CadastroActivity extends AppCompatActivity {
         login = findViewById(R.id.edt_login);
         senha = findViewById(R.id.edt_senha);
 
-        user = new Users();
+
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
     }
