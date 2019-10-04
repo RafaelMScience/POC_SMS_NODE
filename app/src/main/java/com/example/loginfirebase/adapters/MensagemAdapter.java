@@ -33,17 +33,21 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
     private int resource;
     private ArrayList<Users> mensagemList;
 
-    public MensagemAdapter(ArrayList<Users> mensagemList, int resource){
-        this.mensagemList = mensagemList;
-        this.resource = resource;
+    private OnItemClickListener mListener;
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(resource, viewGroup, false);
-
-        return new ViewHolder(view);
+        ViewHolder evh = new ViewHolder(view, mListener);
+        return evh;
     }
 
     @Override
@@ -60,13 +64,13 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
         return mensagemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         private TextView textViewMensagem;
         private TextView textTelefone;
 
         public View view;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view, final OnItemClickListener listener){
             super(view);
 
             this.view = view;
@@ -76,11 +80,20 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
-
+                    if ( listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
                 }
             });
         }
+
+    }
+    public MensagemAdapter(ArrayList<Users> mensagemList, int resource){
+        this.mensagemList = mensagemList;
+        this.resource = resource;
     }
 
 }

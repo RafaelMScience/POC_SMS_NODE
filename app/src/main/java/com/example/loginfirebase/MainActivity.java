@@ -79,6 +79,17 @@ public class MainActivity extends AppCompatActivity {
                     }
                     adapter = new MensagemAdapter(mensageList, R.layout.mensagem_view);
                     recyclerView.setAdapter(adapter);
+
+                    adapter.setOnItemClickListener(new MensagemAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            String numerocel = mensageList.get(position).getTelefone();
+
+                            SmsManager mySmsManager = SmsManager.getDefault();
+                            mySmsManager.sendTextMessage(numerocel, null, textView, null, null);
+
+                        }
+                    });
                 }
             }
 
