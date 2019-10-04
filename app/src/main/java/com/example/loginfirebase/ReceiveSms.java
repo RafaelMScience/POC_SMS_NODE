@@ -12,6 +12,9 @@ public class ReceiveSms extends BroadcastReceiver {
 
     TextView textsms;
 
+    public static final String ACTION_FORCE_OFFLINE = "com.dev2qa.example.broadcast.receiver.ACTION_FORCE_OFFLINE";
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
@@ -33,6 +36,12 @@ public class ReceiveSms extends BroadcastReceiver {
                         Toast.makeText(context, ""+msgBody, Toast.LENGTH_SHORT).show();
                         if(msgBody.equals("Offline")){
                             Toast.makeText(context, ""+msgBody, Toast.LENGTH_SHORT).show();
+                            // Finish all activity.
+                            ActivityManagerUtil.finishAllActivity();
+
+                            // Start the login form activity to let user login again.
+                            Intent loginFormIntent = new Intent(context, LoginActivity.class);
+                            context.startActivity(loginFormIntent);
                         }
                     }
                 } catch (Exception e) {

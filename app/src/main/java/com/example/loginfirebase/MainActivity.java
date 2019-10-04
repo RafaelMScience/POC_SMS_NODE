@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText phone;
     private String textView = "Offline";
 
-    TextView textsms;
+    private ReceiveSms forceOfflineReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,19 @@ public class MainActivity extends AppCompatActivity {
         getMensagemFromFirebase();
 
 
+        // Add this activity to a central activity controller.
+        ActivityManagerUtil.addActivity(this);
+
         //send sms
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, PackageManager.PERMISSION_GRANTED);
         phone = findViewById(R.id.edt_number);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove current activity from central activity controller.
+        ActivityManagerUtil.finishActivity(this);
     }
 
     private void getMensagemFromFirebase(){
