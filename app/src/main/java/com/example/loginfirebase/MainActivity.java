@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     for(DataSnapshot ds: dataSnapshot.getChildren()){
                         String login = (String) ds.child("login").getValue();
                         String senha = (String) ds.child("senha").getValue();
-                        mensageList.add(new Users(login,senha, null, null));
+                        String telefone = (String) ds.child("telefone").getValue();
+                        mensageList.add(new Users(login,senha, telefone, null));
                     }
                     adapter = new MensagemAdapter(mensageList, R.layout.mensagem_view);
                     recyclerView.setAdapter(adapter);

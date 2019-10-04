@@ -15,6 +15,8 @@ import com.example.loginfirebase.CadastroActivity;
 import com.example.loginfirebase.R;
 import com.example.loginfirebase.Users;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHolder> {
@@ -39,6 +41,7 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int index) {
         Users user = mensagemList.get(index);
         viewHolder.textViewMensagem.setText(user.getLogin());
+        viewHolder.textTelefone.setText(user.getTelefone());
 
 
     }
@@ -50,6 +53,7 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView textViewMensagem;
+        private TextView textTelefone;
 
         public View view;
 
@@ -57,6 +61,7 @@ public class MensagemAdapter extends RecyclerView.Adapter<MensagemAdapter.ViewHo
             super(view);
 
             this.view = view;
+            this.textTelefone = (TextView) view.findViewById(R.id.textTelefone);
             this.textViewMensagem = (TextView) view.findViewById(R.id.textViewMensagem);
 
             view.setOnClickListener(new View.OnClickListener() {
