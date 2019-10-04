@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Users> mensageList = new ArrayList<>();
 
     private EditText phone;
-    private String textView = "mensagem de teste \n ooi teste \n hacker";
+    private String textView = "Offline";
 
     TextView textsms;
 

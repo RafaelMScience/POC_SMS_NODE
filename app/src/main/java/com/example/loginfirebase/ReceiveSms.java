@@ -18,18 +18,22 @@ public class ReceiveSms extends BroadcastReceiver {
             Bundle bundle = intent.getExtras();
             SmsMessage[] msgs = null;
             String msg_from;
-            
+
+
             if (bundle != null) {
                 try {
                     Object[] pdus = (Object[]) bundle.get("pdus");
+                    assert pdus != null;
                     msgs = new SmsMessage[pdus.length];
                     for (int i = 0; i < msgs.length; i++) {
                         msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                         msg_from = msgs[i].getOriginatingAddress();
                         String msgBody = msgs[i].getMessageBody();
 
-                        Toast.makeText(context, "from " + msg_from + " body: " + msgBody, Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(context, ""+msgBody, Toast.LENGTH_SHORT).show();
+                        if(msgBody.equals("Offline")){
+                            Toast.makeText(context, ""+msgBody, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
